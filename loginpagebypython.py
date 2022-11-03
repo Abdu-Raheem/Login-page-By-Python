@@ -1,5 +1,5 @@
 import fontstyle
-
+import sys
 
 details = []
 
@@ -10,14 +10,19 @@ def create():
     while n != 0:
         i = 0
         dic = {}
-        dic['name'] = input('name: ')
-        dic['username'] = input('Username: ')
+        name = input('name: ')
+        username = input('Username: ')
         password1 = input('Password: ')
-        dic['password'] = input('Re-enter the Password: ')
-        details.append(dic)
+        password = input('Re-enter the Password: ')
+
         i = i + 1
-        if dic['password'] == password1:
-            print('You have created the Account successfully...!')
+        if password == password1:
+            dic.update({'Name': name})
+            dic.update({'Username': username})
+            dic.update({'Password': password})
+            details.append(dic)
+            print(fontstyle.apply('You have created the Account successfully...!', 'bold/green'))
+            print(details)
             home()
         else:
             print(fontstyle.apply('Doesnt Match', 'bold/red'))
@@ -33,12 +38,10 @@ def home():
     if opt == 2:
         login()
     if opt == 3:
-        exit()
+        sys.exit(1)
 
 
 def login():
-    if len(details) == 0:
-        print(fontstyle.apply('Acount not exist', 'bold/red'))
     user = input('Enter your username: ')
     size = len(details)
     flag1 = 0
